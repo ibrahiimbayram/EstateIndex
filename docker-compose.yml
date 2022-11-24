@@ -1,0 +1,109 @@
+version: '3.8'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    hostname: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node" 
+    ports:
+      - 9200:9200
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    restart: always
+    environment:
+      - ELASTICSEARCH_HOSTS=http://host.docker.internal:9200    # address of elasticsearch docker container which kibana will connect
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+  selenium0:
+    container_name: selenium0
+    hostname: selenium0  
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "9810:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium1:
+    container_name: selenium1
+    hostname: selenium1 
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "9811:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium2:
+    container_name: selenium2
+    hostname: selenium2  
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "9812:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium3:
+    container_name: selenium3
+    hostname: selenium3   
+    image: selenium/standalone-chrome:latest 
+    ports:
+      - "9813:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium4:
+    container_name: selenium4
+    hostname: selenium4  
+    image: selenium/standalone-chrome:latest 
+    ports:
+      - "9814:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium5:
+    container_name: selenium5
+    hostname: selenium5   
+    image: selenium/standalone-chrome:latest  
+    ports:
+      - "9815:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium6:
+    container_name: selenium6
+    hostname: selenium6  
+    image: selenium/standalone-chrome:latest 
+    ports:
+      - "9816:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium7:
+    container_name: selenium7
+    hostname: selenium7 
+    image: selenium/standalone-chrome:latest   
+    ports:
+      - "9817:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium8:
+    container_name: selenium8
+    hostname: selenium8 
+    image: selenium/standalone-chrome:latest   
+    ports:
+      - "9818:4444"
+    privileged: true
+    shm_size: 2g  
+  selenium9:
+    container_name: selenium9
+    hostname: selenium9   
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "9819:4444"
+    privileged: true
+    shm_size: 2g  
+  goservices:
+    container_name: goservices
+    build:
+      context: . 
+      dockerfile: Dockerfile
